@@ -1,22 +1,25 @@
 import { Fragment, useState } from "react";
 
-Interface props {
-
+interface Props {
+  items: string[];
+  heading: String
+  onSelectItem: (item:string) => void;
 }
-function ListGroup() {
-  let items = ["New york", "san fansico", "paris", "London", "Tokyo"];
+function ListGroup({items, heading, onSelectItem}: Props) {
 const [SelectedIndex, setSelectedIndex] = useState (-1);
 
   return (
     <>
-      <h1>List</h1>
+      <h1>{heading}</h1>
       {items.length === 0 && <p>No items found gg</p>}
       <ul className="list-group">
         {items.map((item , index) => (
           <li
             className={SelectedIndex === index ? 'list-group-item active' : 'list-group-item' } 
             key={item}
-            onClick={() => setSelectedIndex(index)}
+            onClick={() =>{setSelectedIndex(index)
+            onSelectItem(item);
+          }}
           >
             {item}
           </li>
